@@ -32,7 +32,7 @@ jobs:
 
   # ── macOS amd64 (Intel) ───────────────────────────────────────────────────
   engine-darwin-amd64:
-    runs-on: macos-13       # Last Intel runner
+    runs-on: macos-15-intel  # Intel x86_64 runner (replaces retired macos-13)
     steps:
       - uses: actions/checkout@v4
 
