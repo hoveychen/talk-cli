@@ -30,6 +30,25 @@ jobs:
           path: assets/engine-darwin-arm64-onnx.tar.gz
           retention-days: 1
 
+  # ── macOS arm64 MLX engine (Apple Silicon only) ───────────────────────────
+  engine-darwin-arm64-mlx:
+    runs-on: macos-latest   # GitHub's macos-latest is Apple Silicon
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build MLX engine (arm64)
+        run: bash scripts/build-engine-macos-mlx.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: engine-darwin-arm64-mlx
+          path: assets/engine-darwin-arm64-mlx.tar.gz
+          retention-days: 1
+
   # ── macOS amd64 (Intel) ───────────────────────────────────────────────────
   engine-darwin-amd64:
     runs-on: macos-15-intel  # Intel x86_64 runner (replaces retired macos-13)
@@ -70,7 +89,7 @@ jobs:
 
   # ── Publish release ───────────────────────────────────────────────────────
   publish:
-    needs: [engine-darwin-arm64, engine-darwin-amd64, engine-windows-amd64]
+    needs: [engine-darwin-arm64, engine-darwin-arm64-mlx, engine-darwin-amd64, engine-windows-amd64]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -91,5 +110,6 @@ jobs:
             `internal/assets/versions.go` and rebuild the CLI.
           files: |
             release/engine-darwin-arm64-onnx.tar.gz
+            release/engine-darwin-arm64-mlx.tar.gz
             release/engine-darwin-amd64-onnx.tar.gz
             release/engine-windows-amd64-onnx.zip
