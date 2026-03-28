@@ -1,0 +1,11 @@
+# Core TTS engine
+kokoro-onnx>=0.4.0
+
+# Audio I/O
+soundfile>=0.12.1
+
+# Numerical (pulled by kokoro-onnx but pinned for reproducibility)
+numpy>=1.24.0
+
+# G2P / language support (installed as extras by kokoro-onnx)
+# misaki[ja] and misaki[zh] are optional; include for the zh engine build.

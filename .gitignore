@@ -1,0 +1,25 @@
+# Build output
+bin/
+release/
+
+# Engine bundles (built by scripts/build-engine-*.sh, uploaded to GitHub Releases)
+assets/**/*.tar.gz
+assets/**/*.zip
+assets/*.tar.gz
+assets/*.zip
+
+# Model files for HuggingFace upload (populated by scripts/download-models.sh)
+assets/**/*.onnx
+assets/**/*.bin
+assets/**/config.json
+
+# Python build artifacts
+engine/__pycache__/
+engine/*.spec
+engine/build-*/
+engine/dist-*/
+engine/.venv*/
+*.pyc
+
+# Go test binaries
+*.test

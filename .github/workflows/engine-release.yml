@@ -1,0 +1,95 @@
+name: Engine Release
+
+# Triggered by pushing a tag like "engine-v0.1.0".
+# Builds universal ONNX engine bundles on each platform and publishes them
+# as GitHub Release assets. The EngineTag constant in internal/assets/versions.go
+# must match the tag for clients to download the right bundles.
+
+on:
+  push:
+    tags: ['engine-v*']
+  workflow_dispatch:
+
+jobs:
+  # ── macOS arm64 (Apple Silicon) ───────────────────────────────────────────
+  engine-darwin-arm64:
+    runs-on: macos-latest   # GitHub's macos-latest is Apple Silicon
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build universal ONNX engine (arm64)
+        run: bash scripts/build-engine-macos.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: engine-darwin-arm64-onnx
+          path: assets/engine-darwin-arm64-onnx.tar.gz
+          retention-days: 1
+
+  # ── macOS amd64 (Intel) ───────────────────────────────────────────────────
+  engine-darwin-amd64:
+    runs-on: macos-13       # Last Intel runner
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build universal ONNX engine (amd64)
+        run: bash scripts/build-engine-macos.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: engine-darwin-amd64-onnx
+          path: assets/engine-darwin-amd64-onnx.tar.gz
+          retention-days: 1
+
+  # ── Windows amd64 ─────────────────────────────────────────────────────────
+  engine-windows-amd64:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build universal ONNX engine (windows)
+        run: powershell -ExecutionPolicy Bypass -File scripts/build-engine-windows.ps1
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: engine-windows-amd64-onnx
+          path: assets/engine-windows-amd64-onnx.zip
+          retention-days: 1
+
+  # ── Publish release ───────────────────────────────────────────────────────
+  publish:
+    needs: [engine-darwin-arm64, engine-darwin-amd64, engine-windows-amd64]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release/
+          merge-multiple: true
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          body: |
+            Engine bundles for **talk-cli**.
+
+            To use, set `EngineTag = "${{ github.ref_name }}"` in
+            `internal/assets/versions.go` and rebuild the CLI.
+          files: |
+            release/engine-darwin-arm64-onnx.tar.gz
+            release/engine-darwin-amd64-onnx.tar.gz
+            release/engine-windows-amd64-onnx.zip
