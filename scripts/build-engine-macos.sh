@@ -138,8 +138,15 @@ build_onnx() {
 
 # ── Main ─────────────────────────────────────────────────────────────────────
 
-build_onnx arm64
-build_onnx amd64
+# Accept optional arch argument: arm64, amd64, or all (default).
+REQUESTED_ARCH="${1:-all}"
+
+if [[ "$REQUESTED_ARCH" == "all" || "$REQUESTED_ARCH" == "arm64" ]]; then
+    build_onnx arm64
+fi
+if [[ "$REQUESTED_ARCH" == "all" || "$REQUESTED_ARCH" == "amd64" ]]; then
+    build_onnx amd64
+fi
 
 echo ""
-echo "✓ macOS ONNX engine bundles built."
+echo "Done: macOS ONNX engine bundles built."

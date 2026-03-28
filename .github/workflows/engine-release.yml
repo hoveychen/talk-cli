@@ -22,7 +22,7 @@ jobs:
           python-version: '3.12'
 
       - name: Build universal ONNX engine (arm64)
-        run: bash scripts/build-engine-macos.sh
+        run: bash scripts/build-engine-macos.sh arm64
 
       - uses: actions/upload-artifact@v4
         with:
@@ -41,7 +41,7 @@ jobs:
           python-version: '3.12'
 
       - name: Build universal ONNX engine (amd64)
-        run: bash scripts/build-engine-macos.sh
+        run: bash scripts/build-engine-macos.sh amd64
 
       - uses: actions/upload-artifact@v4
         with:

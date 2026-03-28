@@ -15,7 +15,7 @@ function Build-Variant {
     param([string]$Variant, [string]$Arch = "amd64")
 
     Write-Host ""
-    Write-Host "── Building $Variant / $Arch ──────────────────────────"
+    Write-Host "-- Building $Variant / $Arch --------------------------"
 
     $VenvDir  = Join-Path $EngineDir ".venv-$Variant-$Arch"
     $DistDir  = Join-Path $EngineDir "dist-$Variant-$Arch"
@@ -62,7 +62,7 @@ function Build-Variant {
     Write-Host "  Packaging -> $Archive"
     Compress-Archive -Path (Join-Path $DistDir "kokoro_engine") -DestinationPath $Archive -Force
     $Size = [math]::Round((Get-Item $Archive).Length / 1MB, 1)
-    Write-Host "  ✓ ${Size}MB  $Archive"
+    Write-Host "  OK ${Size}MB  $Archive"
 
     # Cleanup
     Remove-Item -Recurse -Force $DistDir
@@ -73,4 +73,4 @@ Build-Variant -Variant "en"
 Build-Variant -Variant "zh"
 
 Write-Host ""
-Write-Host "✓ All Windows engine bundles built."
+Write-Host "OK All Windows engine bundles built."
