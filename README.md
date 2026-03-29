@@ -38,7 +38,13 @@ talk --output hello.wav "Save to file"
 
 ## Installation
 
-### One-line install (recommended)
+### npm (Node.js 18+)
+
+```bash
+npm install -g talk-tts
+```
+
+### One-line install
 
 **macOS:**
 ```bash
@@ -141,6 +147,16 @@ The Go binary manages downloads, invokes the engine subprocess with JSON argumen
 | English | Kokoro v1.0 (INT8 ONNX) | ~88 MB | [thewh1teagle/kokoro-onnx](https://huggingface.co/thewh1teagle/kokoro-onnx) |
 | Chinese | Kokoro v1.1-zh (INT8 ONNX) | ~82 MB | [hoveyc/talk-cli-models](https://huggingface.co/hoveyc/talk-cli-models) |
 | English (MLX) | Kokoro-82M-bf16 | streamed | [mlx-community/Kokoro-82M-bf16](https://huggingface.co/mlx-community/Kokoro-82M-bf16) |
+
+---
+
+## AI Agent Integration
+
+talk-cli ships with AI skills compatible with [Claude Code](https://claude.ai/claude-code), [Cursor](https://cursor.com), and other AI coding agents. Install the skill to let your AI assistant use talk-cli:
+
+```bash
+npx skills add hoveychen/talk-cli
+```
 
 ---
 

@@ -1,0 +1,34 @@
+{
+  "name": "talk-tts",
+  "version": "0.0.0-dev",
+  "description": "Multilingual text-to-speech CLI powered by Kokoro",
+  "bin": {
+    "talk": "npm/run.js"
+  },
+  "scripts": {
+    "postinstall": "node npm/install.js"
+  },
+  "files": [
+    "npm/",
+    "skills/",
+    "README.md",
+    "LICENSE"
+  ],
+  "os": [
+    "darwin",
+    "win32"
+  ],
+  "keywords": [
+    "tts",
+    "text-to-speech",
+    "kokoro",
+    "cli",
+    "offline",
+    "multilingual"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hoveychen/talk-cli.git"
+  }
+}

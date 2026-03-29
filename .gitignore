@@ -23,3 +23,8 @@ engine/.venv*/
 
 # Go test binaries
 *.test
+
+# npm
+npm/bin/
+node_modules/
+*.tgz
