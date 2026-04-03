@@ -27,8 +27,14 @@ exit /b 1
 echo Building with %CSC%...
 if not exist bin mkdir bin
 
+set "REF=%WINDIR%\Microsoft.NET\assembly\GAC_MSIL\System.Speech\v4.0_4.0.0.0__31bf3856ad364e35\System.Speech.dll"
+if not exist "%REF%" (
+    echo Warning: System.Speech.dll not found in GAC, trying bare reference...
+    set "REF=System.Speech.dll"
+)
+
 "%CSC%" /nologo /optimize /target:winexe ^
-    /r:System.Speech.dll ^
+    /r:"%REF%" ^
     /r:System.Windows.Forms.dll ^
     /r:System.Drawing.dll ^
     /out:bin\speak-listen.exe ^
