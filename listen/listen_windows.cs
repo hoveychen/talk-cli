@@ -229,9 +229,9 @@ class ListenForm : Form
         if (done) return;
         done = true;
 
-        silenceTimer?.Stop();
-        maxTimer?.Stop();
-        try { engine?.RecognizeAsyncCancel(); } catch { }
+        if (silenceTimer != null) silenceTimer.Stop();
+        if (maxTimer != null) maxTimer.Stop();
+        try { if (engine != null) engine.RecognizeAsyncCancel(); } catch { }
 
         // Visual confirmation.
         if (string.IsNullOrEmpty(currentText))
