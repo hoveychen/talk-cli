@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-MODULE := github.com/hoveychen/talk-cli
+MODULE := github.com/hoveychen/speak-cli
 
 HOST_OS   := $(shell go env GOOS)
 HOST_ARCH := $(shell go env GOARCH)
@@ -13,17 +13,17 @@ all: build
 
 # ─── Go build ────────────────────────────────────────────────────────────────
 
-# Build the talk CLI for all supported platforms.
+# Build the speak CLI for all supported platforms.
 build:
-	@echo "→ Building talk..."
+	@echo "→ Building speak..."
 	@mkdir -p bin
 	@GOOS=darwin  GOARCH=arm64 go build -ldflags="-s -w" \
-	    -o bin/talk-darwin-arm64      ./cmd/talk
+	    -o bin/speak-darwin-arm64      ./cmd/speak
 	@GOOS=darwin  GOARCH=amd64 go build -ldflags="-s -w" \
-	    -o bin/talk-darwin-amd64      ./cmd/talk
+	    -o bin/speak-darwin-amd64      ./cmd/speak
 	@GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" \
-	    -o bin/talk-windows-amd64.exe ./cmd/talk
-	@echo "✓ talk binaries in bin/"
+	    -o bin/speak-windows-amd64.exe ./cmd/speak
+	@echo "✓ speak binaries in bin/"
 
 # ─── Engine builds ───────────────────────────────────────────────────────────
 
@@ -67,9 +67,9 @@ release-engines:
 
 # Upload ONNX models, voices, and config to HuggingFace.
 # Requires: huggingface-cli and assets/{en,zh}/model.onnx + voices.bin.
-# Default repo: hoveyc/talk-cli-models  (override with REPO=<owner/name>)
+# Default repo: hoveyc/speak-cli-models  (override with REPO=<owner/name>)
 upload-models:
-	@bash scripts/upload-models-hf.sh --repo "${REPO:-hoveyc/talk-cli-models}"
+	@bash scripts/upload-models-hf.sh --repo "${REPO:-hoveyc/speak-cli-models}"
 
 # ─── Housekeeping ────────────────────────────────────────────────────────────
 

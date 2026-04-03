@@ -1,38 +1,38 @@
 ---
-name: talk-tts
+name: speak-cli
 description: Multilingual text-to-speech CLI — synthesize speech, select voices, export audio
 ---
 
-# talk-tts
+# speak-cli
 
-`talk` is a fast, offline-capable multilingual text-to-speech CLI powered by Kokoro. It auto-detects language, supports 150+ voices across 8 languages, and uses the faster MLX backend automatically on Apple Silicon.
+`speak` is a fast, offline-capable multilingual text-to-speech CLI powered by Kokoro. It auto-detects language, supports 150+ voices across 8 languages, and uses the faster MLX backend automatically on Apple Silicon.
 
 After first use, the engine and models are cached locally — subsequent runs start instantly with no network required.
 
 ## Installation
 
-Before using talk commands, verify it is installed:
+Before using speak commands, verify it is installed:
 
 ```bash
-talk --help
+speak --help
 ```
 
 If not installed, use one of:
 
 ```bash
 # npm (Node.js 18+)
-npm install -g talk-tts
+npm install -g speak-cli
 
 # macOS
-curl -fsSL https://raw.githubusercontent.com/hoveychen/talk-cli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hoveychen/speak-cli/main/install.sh | bash
 
 # Windows PowerShell
-powershell -c "irm https://raw.githubusercontent.com/hoveychen/talk-cli/main/install.ps1 | iex"
+powershell -c "irm https://raw.githubusercontent.com/hoveychen/speak-cli/main/install.ps1 | iex"
 ```
 
 ## Commands Reference
 
-### `talk [flags] <text>` — Synthesize speech
+### `speak [flags] <text>` — Synthesize speech
 
 Speak text aloud or save to WAV. Language is auto-detected from the text unless `--lang` is specified.
 
@@ -46,7 +46,7 @@ Speak text aloud or save to WAV. Language is auto-detected from the text unless 
 
 **Important:** The text argument must be a single quoted string. Wrap it in quotes.
 
-### `talk voices [--lang <lang>]` — List available voices
+### `speak voices [--lang <lang>]` — List available voices
 
 Lists all available voices offline (no engine or model download needed).
 
@@ -55,7 +55,7 @@ Lists all available voices offline (no engine or model download needed).
 - `--lang zh`: Chinese voices only
 - Also supports: `es`, `fr`, `hi`, `it`, `ja`, `pt`
 
-### `talk init [--lang <lang>]` — Pre-download assets
+### `speak init [--lang <lang>]` — Pre-download assets
 
 Downloads engine and model files for offline use.
 
@@ -65,7 +65,7 @@ Downloads engine and model files for offline use.
 
 ## Language Detection
 
-When `--lang` is `auto` (default), talk inspects the text for CJK characters (Unicode U+4E00–U+9FFF):
+When `--lang` is `auto` (default), speak inspects the text for CJK characters (Unicode U+4E00–U+9FFF):
 - If any CJK character is found → Chinese (`zh`)
 - Otherwise → English (`en`)
 
@@ -110,36 +110,36 @@ Voices follow the pattern `{language}{gender}_{name}`:
 | Japanese | `jf_alpha` |
 | Portuguese | `pf_dora` |
 
-Use `talk voices --lang <code>` to see all available voices for a language.
+Use `speak voices --lang <code>` to see all available voices for a language.
 
 ## Common Patterns
 
 ```bash
 # Basic speech (language auto-detected)
-talk "Hello, world!"
-talk "你好，欢迎使用 talk-cli"
+speak "Hello, world!"
+speak "你好，欢迎使用 speak-cli"
 
 # Choose a specific voice
-talk -v af_sky "A different voice"
-talk -v zm_010 "换一个男声"
+speak -v af_sky "A different voice"
+speak -v zm_010 "换一个男声"
 
 # Adjust speed
-talk -s 1.5 "Speak faster"
-talk -s 0.7 "Speak slower"
+speak -s 1.5 "Speak faster"
+speak -s 0.7 "Speak slower"
 
 # Save to WAV file
-talk -o greeting.wav "Hello, world!"
+speak -o greeting.wav "Hello, world!"
 
 # Force language (required for es/fr/hi/it/ja/pt)
-talk --lang ja "こんにちは"
-talk --lang es "Hola, mundo"
+speak --lang ja "こんにちは"
+speak --lang es "Hola, mundo"
 
 # Scripting: suppress progress bar
-talk --no-progress -o out.wav "Silent download"
+speak --no-progress -o out.wav "Silent download"
 
 # Batch export
 for i in 1 2 3; do
-  talk -o "part${i}.wav" "This is part ${i}"
+  speak -o "part${i}.wav" "This is part ${i}"
 done
 ```
 
@@ -148,12 +148,12 @@ done
 For offline environments, pre-download assets:
 
 ```bash
-talk init              # All languages
-talk init --lang en    # English only
-talk init --lang zh    # Chinese only
+speak init              # All languages
+speak init --lang en    # English only
+speak init --lang zh    # Chinese only
 ```
 
-Assets are cached in `~/.cache/talk-cli/`:
+Assets are cached in `~/.cache/speak-cli/`:
 - Engine: PyInstaller-packaged Kokoro engine (~200 MB)
 - Models: ONNX model + voice data (~80–90 MB per language)
 - On Apple Silicon: MLX engine is also downloaded for English (faster)
@@ -169,9 +169,9 @@ Assets are cached in `~/.cache/talk-cli/`:
 
 ## Troubleshooting
 
-- **First run is slow**: The engine and model are downloaded on first use. Use `talk init` to pre-download.
-- **MLX fallback message on Apple Silicon**: If the MLX engine cannot load (e.g., missing Metal libraries), talk automatically falls back to the ONNX engine. This is normal and does not affect output quality.
-- **"unsupported platform" error**: talk currently supports macOS and Windows. On Linux, build from source.
+- **First run is slow**: The engine and model are downloaded on first use. Use `speak init` to pre-download.
+- **MLX fallback message on Apple Silicon**: If the MLX engine cannot load (e.g., missing Metal libraries), speak automatically falls back to the ONNX engine. This is normal and does not affect output quality.
+- **"unsupported platform" error**: speak currently supports macOS and Windows. On Linux, build from source.
 - **Output format**: Only WAV output is supported. Use external tools (ffmpeg) to convert to other formats.
 
 ## Constraints

@@ -104,7 +104,7 @@ jobs:
         with:
           name: ${{ github.ref_name }}
           body: |
-            Engine bundles for **talk-cli**.
+            Engine bundles for **speak-cli**.
 
             To use, set `EngineTag = "${{ github.ref_name }}"` in
             `internal/assets/versions.go` and rebuild the CLI.

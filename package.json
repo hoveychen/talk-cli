@@ -1,9 +1,9 @@
 {
-  "name": "talk-tts",
+  "name": "speak-cli",
   "version": "0.0.0-dev",
   "description": "Multilingual text-to-speech CLI powered by Kokoro",
   "bin": {
-    "talk": "npm/run.js"
+    "speak": "npm/run.js"
   },
   "scripts": {
     "postinstall": "node npm/install.js"
@@ -29,6 +29,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hoveychen/talk-cli.git"
+    "url": "https://github.com/hoveychen/speak-cli.git"
   }
 }

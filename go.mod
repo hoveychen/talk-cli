@@ -1,4 +1,4 @@
-module github.com/hoveychen/talk-cli
+module github.com/hoveychen/speak-cli
 
 go 1.22
 

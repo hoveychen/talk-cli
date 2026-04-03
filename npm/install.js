@@ -7,9 +7,9 @@ const path = require("path");
 
 // Platform → GitHub Release asset mapping
 const PLATFORMS = {
-  "darwin-arm64": "talk-darwin-arm64",
-  "darwin-x64": "talk-darwin-amd64",
-  "win32-x64": "talk-windows-amd64.exe",
+  "darwin-arm64": "speak-darwin-arm64",
+  "darwin-x64": "speak-darwin-amd64",
+  "win32-x64": "speak-windows-amd64.exe",
 };
 
 const pkg = require("../package.json");
@@ -19,21 +19,21 @@ const asset = PLATFORMS[key];
 
 if (!asset) {
   console.error(
-    `talk-tts: unsupported platform ${process.platform}/${process.arch}\n` +
+    `speak-cli: unsupported platform ${process.platform}/${process.arch}\n` +
       `Supported: macOS (arm64, x64), Windows (x64)\n` +
-      `Build from source: https://github.com/hoveychen/talk-cli`
+      `Build from source: https://github.com/hoveychen/speak-cli`
   );
   process.exit(1);
 }
 
 const binDir = path.join(__dirname, "bin");
-const binName = process.platform === "win32" ? "talk.exe" : "talk";
+const binName = process.platform === "win32" ? "speak.exe" : "speak";
 const binPath = path.join(binDir, binName);
-const url = `https://github.com/hoveychen/talk-cli/releases/download/v${version}/${asset}`;
+const url = `https://github.com/hoveychen/speak-cli/releases/download/v${version}/${asset}`;
 
 function download(url, dest, redirects) {
   if (redirects <= 0) {
-    console.error("talk-tts: too many redirects");
+    console.error("speak-cli: too many redirects");
     process.exit(1);
   }
 
@@ -60,7 +60,7 @@ function download(url, dest, redirects) {
           downloaded += chunk.length;
           if (totalBytes > 0 && process.stderr.isTTY) {
             const pct = ((downloaded / totalBytes) * 100).toFixed(0);
-            process.stderr.write(`\rtalk-tts: downloading ${pct}%`);
+            process.stderr.write(`\rspeak-cli: downloading ${pct}%`);
           }
         });
         res.pipe(file);
@@ -77,17 +77,17 @@ function download(url, dest, redirects) {
 async function main() {
   fs.mkdirSync(binDir, { recursive: true });
 
-  console.log(`talk-tts: downloading talk v${version} for ${key}...`);
+  console.log(`speak-cli: downloading speak v${version} for ${key}...`);
   await download(url, binPath, 5);
 
   if (process.platform !== "win32") {
     fs.chmodSync(binPath, 0o755);
   }
 
-  console.log(`talk-tts: installed to ${binPath}`);
+  console.log(`speak-cli: installed to ${binPath}`);
 }
 
 main().catch((err) => {
-  console.error(`talk-tts: ${err.message}`);
+  console.error(`speak-cli: ${err.message}`);
   process.exit(1);
 });

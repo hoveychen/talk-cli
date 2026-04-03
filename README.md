@@ -1,17 +1,17 @@
-# talk-cli
+# speak-cli
 
-[![Release](https://img.shields.io/github/v/release/hoveychen/talk-cli)](https://github.com/hoveychen/talk-cli/releases/latest)
+[![Release](https://img.shields.io/github/v/release/hoveychen/speak-cli)](https://github.com/hoveychen/speak-cli/releases/latest)
 [![Go](https://img.shields.io/badge/go-1.22+-00ADD8?logo=go)](https://go.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-lightgrey)](https://github.com/hoveychen/talk-cli/releases/latest)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-lightgrey)](https://github.com/hoveychen/speak-cli/releases/latest)
 
-**talk-cli** is a fast, offline-capable multilingual text-to-speech CLI powered by [Kokoro](https://github.com/thewh1teagle/kokoro-onnx). It auto-detects language, supports 150+ voices, and uses the faster MLX backend automatically on Apple Silicon.
+**speak-cli** is a fast, offline-capable multilingual text-to-speech CLI powered by [Kokoro](https://github.com/thewh1teagle/kokoro-onnx). It auto-detects language, supports 150+ voices, and uses the faster MLX backend automatically on Apple Silicon.
 
 ```bash
-talk "Hello, world!"
-talk "你好，欢迎使用 talk-cli"
-talk -v af_sky -s 1.2 "Speed it up a bit"
-talk --output hello.wav "Save to file"
+speak "Hello, world!"
+speak "你好，欢迎使用 speak-cli"
+speak -v af_sky -s 1.2 "Speed it up a bit"
+speak --output hello.wav "Save to file"
 ```
 
 ---
@@ -21,7 +21,7 @@ talk --output hello.wav "Save to file"
 - **Auto language detection** — switches between English and Chinese based on text content
 - **150+ voices** — 54 English voices (American, British, Spanish, French, Hindi, Japanese, Portuguese, Italian) and 103 Chinese voices
 - **Apple Silicon optimised** — uses MLX backend for English on M-series Macs, falls back to ONNX automatically
-- **Offline after first use** — engine and models are cached in `~/.cache/talk-cli/`
+- **Offline after first use** — engine and models are cached in `~/.cache/speak-cli/`
 - **Save to file** — export speech as WAV with `--output`
 - **Tiny binary** — ~8 MB Go binary; engine and models are downloaded on demand
 
@@ -41,30 +41,30 @@ talk --output hello.wav "Save to file"
 ### npm (Node.js 18+)
 
 ```bash
-npm install -g talk-tts
+npm install -g speak-cli
 ```
 
 ### One-line install
 
 **macOS:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hoveychen/talk-cli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hoveychen/speak-cli/main/install.sh | bash
 ```
 
 **Windows (PowerShell):**
 ```powershell
-powershell -c "irm https://raw.githubusercontent.com/hoveychen/talk-cli/main/install.ps1 | iex"
+powershell -c "irm https://raw.githubusercontent.com/hoveychen/speak-cli/main/install.ps1 | iex"
 ```
 
-Auto-detects your platform and architecture, installs to `~/.local/bin` (macOS) or `%LOCALAPPDATA%\talk-cli\bin` (Windows), and adds it to your PATH automatically.
+Auto-detects your platform and architecture, installs to `~/.local/bin` (macOS) or `%LOCALAPPDATA%\speak-cli\bin` (Windows), and adds it to your PATH automatically.
 
 To install a specific version or change the install directory:
 ```bash
 # macOS
-TALK_VERSION=v0.2.0 TALK_INSTALL_DIR=/usr/local/bin curl -fsSL https://raw.githubusercontent.com/hoveychen/talk-cli/main/install.sh | bash
+SPEAK_VERSION=v0.2.0 SPEAK_INSTALL_DIR=/usr/local/bin curl -fsSL https://raw.githubusercontent.com/hoveychen/speak-cli/main/install.sh | bash
 
 # Windows
-$env:TALK_VERSION="v0.2.0"; $env:TALK_INSTALL_DIR="C:\Tools"; powershell -c "irm https://raw.githubusercontent.com/hoveychen/talk-cli/main/install.ps1 | iex"
+$env:SPEAK_VERSION="v0.2.0"; $env:SPEAK_INSTALL_DIR="C:\Tools"; powershell -c "irm https://raw.githubusercontent.com/hoveychen/speak-cli/main/install.ps1 | iex"
 ```
 
 ### Build from source
@@ -72,8 +72,8 @@ $env:TALK_VERSION="v0.2.0"; $env:TALK_INSTALL_DIR="C:\Tools"; powershell -c "irm
 Requires Go 1.22+.
 
 ```bash
-git clone https://github.com/hoveychen/talk-cli.git
-cd talk-cli
+git clone https://github.com/hoveychen/speak-cli.git
+cd speak-cli
 make build       # outputs to bin/
 ```
 
@@ -84,28 +84,28 @@ make build       # outputs to bin/
 ### Speak text
 
 ```bash
-talk "Hello, world!"                        # English (auto-detected)
-talk "你好，欢迎使用 talk-cli"               # Chinese (auto-detected)
-talk --lang zh "Kokoro is great"            # Force language
-talk -v af_sky "Choose a specific voice"    # Choose voice
-talk -s 1.5 "Speak 50% faster"             # Adjust speed (0.5–2.0)
-talk -o out.wav "Save as WAV"              # Export to file
+speak "Hello, world!"                        # English (auto-detected)
+speak "你好，欢迎使用 speak-cli"               # Chinese (auto-detected)
+speak --lang zh "Kokoro is great"            # Force language
+speak -v af_sky "Choose a specific voice"    # Choose voice
+speak -s 1.5 "Speak 50% faster"             # Adjust speed (0.5–2.0)
+speak -o out.wav "Save as WAV"              # Export to file
 ```
 
 ### List voices
 
 ```bash
-talk voices              # All voices
-talk voices --lang en    # English only
-talk voices --lang zh    # Chinese only
+speak voices              # All voices
+speak voices --lang en    # English only
+speak voices --lang zh    # Chinese only
 ```
 
 ### Pre-download assets (for offline use)
 
 ```bash
-talk init                # Download both English and Chinese
-talk init --lang en      # English only
-talk init --lang zh      # Chinese only
+speak init                # Download both English and Chinese
+speak init --lang en      # English only
+speak init --lang zh      # Chinese only
 ```
 
 ### All flags
@@ -124,10 +124,10 @@ Flags:
 
 ## How it works
 
-On first use, `talk` downloads the appropriate engine bundle and model:
+On first use, `speak` downloads the appropriate engine bundle and model:
 
 ```
-~/.cache/talk-cli/
+~/.cache/speak-cli/
 ├── en/
 │   ├── engine/     # PyInstaller-packaged Kokoro ONNX or MLX engine
 │   └── model/      # model.onnx + voices.bin (~88 MB INT8)
@@ -145,17 +145,17 @@ The Go binary manages downloads, invokes the engine subprocess with JSON argumen
 | Language | Model | Size | Source |
 |----------|-------|------|--------|
 | English | Kokoro v1.0 (INT8 ONNX) | ~88 MB | [thewh1teagle/kokoro-onnx](https://huggingface.co/thewh1teagle/kokoro-onnx) |
-| Chinese | Kokoro v1.1-zh (INT8 ONNX) | ~82 MB | [hoveyc/talk-cli-models](https://huggingface.co/hoveyc/talk-cli-models) |
+| Chinese | Kokoro v1.1-zh (INT8 ONNX) | ~82 MB | [hoveyc/speak-cli-models](https://huggingface.co/hoveyc/speak-cli-models) |
 | English (MLX) | Kokoro-82M-bf16 | streamed | [mlx-community/Kokoro-82M-bf16](https://huggingface.co/mlx-community/Kokoro-82M-bf16) |
 
 ---
 
 ## AI Agent Integration
 
-talk-cli ships with AI skills compatible with [Claude Code](https://claude.ai/claude-code), [Cursor](https://cursor.com), and other AI coding agents. Install the skill to let your AI assistant use talk-cli:
+speak-cli ships with AI skills compatible with [Claude Code](https://claude.ai/claude-code), [Cursor](https://cursor.com), and other AI coding agents. Install the skill to let your AI assistant use speak-cli:
 
 ```bash
-npx skills add hoveychen/talk-cli
+npx skills add hoveychen/speak-cli
 ```
 
 ---

@@ -12,7 +12,7 @@ Describe the feature you'd like. Include example CLI usage if applicable.
 
 ```bash
 # example
-talk --new-flag "example"
+speak --new-flag "example"
 ```
 
 **Alternatives considered**

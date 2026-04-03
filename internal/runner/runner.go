@@ -14,15 +14,15 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/hoveychen/talk-cli/internal/assets"
-	"github.com/hoveychen/talk-cli/internal/downloader"
+	"github.com/hoveychen/speak-cli/internal/assets"
+	"github.com/hoveychen/speak-cli/internal/downloader"
 )
 
 // Options controls the behaviour of New.
 type Options struct {
 	// NoProgress suppresses the download progress bar.
 	NoProgress bool
-	// CacheDir overrides the default cache directory (~/.cache/talk-cli).
+	// CacheDir overrides the default cache directory (~/.cache/speak-cli).
 	CacheDir string
 }
 
@@ -36,13 +36,13 @@ type Runner struct {
 	lang       string // "en" or "zh"
 }
 
-// defaultCacheDir returns the platform cache directory for talk-cli.
+// defaultCacheDir returns the platform cache directory for speak-cli.
 func defaultCacheDir() (string, error) {
 	base, err := os.UserCacheDir()
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(base, "talk-cli"), nil
+	return filepath.Join(base, "speak-cli"), nil
 }
 
 // supportedLangs is the set of languages accepted by New.
@@ -130,7 +130,7 @@ func New(lang string, opts Options) (*Runner, error) {
 // to the ONNX engine (e.g. Metal library unavailable on some macOS versions).
 func (r *Runner) Speak(text, voice string, speed float64, outputPath string) (string, error) {
 	if outputPath == "" {
-		f, err := os.CreateTemp("", "talk-*.wav")
+		f, err := os.CreateTemp("", "speak-*.wav")
 		if err != nil {
 			return "", err
 		}

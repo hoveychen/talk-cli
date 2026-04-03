@@ -2,18 +2,18 @@
 # Works on macOS and Linux. Downloads the right binary. You're welcome.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/hoveychen/talk-cli/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/hoveychen/speak-cli/main/install.sh | bash
 #
 # Options (env vars):
-#   TALK_VERSION=v0.2.0   install a specific version (default: latest)
-#   TALK_INSTALL_DIR=/usr/local/bin  install location (default: ~/.local/bin)
+#   SPEAK_VERSION=v0.2.0   install a specific version (default: latest)
+#   SPEAK_INSTALL_DIR=/usr/local/bin  install location (default: ~/.local/bin)
 
 set -euo pipefail
 
-REPO="hoveychen/talk-cli"
-BINARY_NAME="talk"
-INSTALL_DIR="${TALK_INSTALL_DIR:-$HOME/.local/bin}"
-VERSION="${TALK_VERSION:-}"
+REPO="hoveychen/speak-cli"
+BINARY_NAME="speak"
+INSTALL_DIR="${SPEAK_INSTALL_DIR:-$HOME/.local/bin}"
+VERSION="${SPEAK_VERSION:-}"
 
 # ── colours ──────────────────────────────────────────────────────────────────
 if [ -t 1 ]; then
@@ -35,8 +35,8 @@ ARCH="$(uname -m)"
 case "$OS" in
   Darwin)
     case "$ARCH" in
-      arm64)  ASSET="talk-darwin-arm64" ;;
-      x86_64) ASSET="talk-darwin-amd64" ;;
+      arm64)  ASSET="speak-darwin-arm64" ;;
+      x86_64) ASSET="speak-darwin-amd64" ;;
       *)      die "Unsupported macOS architecture: $ARCH" ;;
     esac
     ;;
@@ -44,7 +44,7 @@ case "$OS" in
     die "Linux binaries are not yet published. Build from source: https://github.com/$REPO"
     ;;
   *)
-    die "Unsupported OS: $OS. On Windows, download talk-windows-amd64.exe from https://github.com/$REPO/releases"
+    die "Unsupported OS: $OS. On Windows, download speak-windows-amd64.exe from https://github.com/$REPO/releases"
     ;;
 esac
 
@@ -66,7 +66,7 @@ fi
 DOWNLOAD_URL="https://github.com/$REPO/releases/download/$VERSION/$ASSET"
 
 # ── download ──────────────────────────────────────────────────────────────────
-printf "\n${BOLD}Installing talk ${VERSION}${RESET} (${OS}/${ARCH})\n\n"
+printf "\n${BOLD}Installing speak ${VERSION}${RESET} (${OS}/${ARCH})\n\n"
 
 TMP_FILE="$(mktemp)"
 trap 'rm -f "$TMP_FILE"' EXIT
@@ -97,4 +97,4 @@ case ":$PATH:" in
 esac
 
 # ── done ──────────────────────────────────────────────────────────────────────
-printf "\n${GREEN}${BOLD}All done!${RESET} Run: ${BOLD}talk \"Hello, world!\"${RESET}\n\n"
+printf "\n${GREEN}${BOLD}All done!${RESET} Run: ${BOLD}speak \"Hello, world!\"${RESET}\n\n"

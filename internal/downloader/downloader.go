@@ -83,7 +83,7 @@ func Download(url, destPath string, noProgress bool, desc string) error {
 // DownloadAndExtract downloads url to a temp file and extracts it into destDir.
 // The archive format is auto-detected from magic bytes (tar.gz or zip).
 func DownloadAndExtract(url, destDir string, noProgress bool, desc string) error {
-	tmp, err := os.CreateTemp("", "talk-engine-*.tmp")
+	tmp, err := os.CreateTemp("", "speak-engine-*.tmp")
 	if err != nil {
 		return err
 	}

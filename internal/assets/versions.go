@@ -12,10 +12,10 @@ const (
 	EngineTag = "engine-v0.1.0"
 
 	// GHReleasesBase is the GitHub Releases download URL prefix.
-	GHReleasesBase = "https://github.com/hoveychen/talk-cli/releases/download"
+	GHReleasesBase = "https://github.com/hoveychen/speak-cli/releases/download"
 
 	// HFBase is the HuggingFace raw-file base URL for model downloads.
-	HFBase = "https://huggingface.co/hoveyc/talk-cli-models/resolve/main"
+	HFBase = "https://huggingface.co/hoveyc/speak-cli-models/resolve/main"
 )
 
 // EngineURL returns the download URL for the ONNX engine bundle matching the

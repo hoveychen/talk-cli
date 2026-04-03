@@ -1,20 +1,20 @@
 # Works on Windows. Downloads the right binary. You're welcome.
 #
 # Usage:
-#   powershell -c "irm https://raw.githubusercontent.com/hoveychen/talk-cli/main/install.ps1 | iex"
+#   powershell -c "irm https://raw.githubusercontent.com/hoveychen/speak-cli/main/install.ps1 | iex"
 #
 # Options (env vars):
-#   $env:TALK_VERSION    = "v0.2.0"         install a specific version (default: latest)
-#   $env:TALK_INSTALL_DIR = "C:\Tools"      install location (default: $env:LOCALAPPDATA\talk-cli\bin)
+#   $env:SPEAK_VERSION    = "v0.2.0"         install a specific version (default: latest)
+#   $env:SPEAK_INSTALL_DIR = "C:\Tools"      install location (default: $env:LOCALAPPDATA\speak-cli\bin)
 
 $ErrorActionPreference = "Stop"
 
-$Repo       = "hoveychen/talk-cli"
-$BinaryName = "talk.exe"
-$Asset      = "talk-windows-amd64.exe"
-$InstallDir = if ($env:TALK_INSTALL_DIR) { $env:TALK_INSTALL_DIR } `
-              else { Join-Path $env:LOCALAPPDATA "talk-cli\bin" }
-$Version    = if ($env:TALK_VERSION) { $env:TALK_VERSION } else { "" }
+$Repo       = "hoveychen/speak-cli"
+$BinaryName = "speak.exe"
+$Asset      = "speak-windows-amd64.exe"
+$InstallDir = if ($env:SPEAK_INSTALL_DIR) { $env:SPEAK_INSTALL_DIR } `
+              else { Join-Path $env:LOCALAPPDATA "speak-cli\bin" }
+$Version    = if ($env:SPEAK_VERSION) { $env:SPEAK_VERSION } else { "" }
 
 function Write-Info  { param($msg) Write-Host "  -> $msg" -ForegroundColor Cyan }
 function Write-Ok    { param($msg) Write-Host "  v $msg"  -ForegroundColor Green }
@@ -42,10 +42,10 @@ $DownloadUrl = "https://github.com/$Repo/releases/download/$Version/$Asset"
 
 # ── download ──────────────────────────────────────────────────────────────────
 Write-Host ""
-Write-Host "  Installing talk $Version (Windows/AMD64)" -ForegroundColor White
+Write-Host "  Installing speak $Version (Windows/AMD64)" -ForegroundColor White
 Write-Host ""
 
-$TmpFile = Join-Path $env:TEMP "talk-install-$([System.IO.Path]::GetRandomFileName()).exe"
+$TmpFile = Join-Path $env:TEMP "speak-install-$([System.IO.Path]::GetRandomFileName()).exe"
 
 Write-Info "Downloading $Asset..."
 try {
@@ -77,5 +77,5 @@ if ($UserPath -notlike "*$InstallDir*") {
 
 # ── done ──────────────────────────────────────────────────────────────────────
 Write-Host ""
-Write-Host "  All done! Run: talk ""Hello, world!""" -ForegroundColor Green
+Write-Host "  All done! Run: speak ""Hello, world!""" -ForegroundColor Green
 Write-Host ""

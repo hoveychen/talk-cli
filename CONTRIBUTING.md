@@ -1,4 +1,4 @@
-# Contributing to talk-cli
+# Contributing to speak-cli
 
 Thank you for your interest in contributing! Here's how to get started.
 
@@ -7,17 +7,17 @@ Thank you for your interest in contributing! Here's how to get started.
 **Prerequisites:** Go 1.22+, Python 3.10–3.12 (for engine builds only)
 
 ```bash
-git clone https://github.com/hoveychen/talk-cli.git
-cd talk-cli
-go build ./cmd/talk   # build CLI
+git clone https://github.com/hoveychen/speak-cli.git
+cd speak-cli
+go build ./cmd/speak   # build CLI
 ```
 
-Running `./talk "Hello"` will auto-download the engine and model on first use.
+Running `./speak "Hello"` will auto-download the engine and model on first use.
 
 ## Project structure
 
 ```
-cmd/talk/         CLI entry point (Cobra commands)
+cmd/speak/        CLI entry point (Cobra commands)
 internal/
   assets/         Version constants and download URLs
   downloader/     HTTP download + archive extraction
@@ -40,7 +40,7 @@ scripts/          Build and model preparation scripts
 Voice metadata lives in [internal/voices/voices.go](internal/voices/voices.go). Add an entry to the appropriate slice (`enVoices` or `zhVoices`) and verify it works with the engine:
 
 ```bash
-./talk -v <new_voice_name> "Test sentence"
+./speak -v <new_voice_name> "Test sentence"
 ```
 
 ## Adding a new language
@@ -51,7 +51,7 @@ A new language requires:
 2. Updates to `internal/assets/versions.go` (download URLs)
 3. Updates to `internal/runner/runner.go` (engine invocation)
 4. New entries in `internal/voices/voices.go`
-5. Language detection logic in `cmd/talk/main.go`
+5. Language detection logic in `cmd/speak/main.go`
 
 Please open an issue first to discuss scope before starting.
 
@@ -60,7 +60,7 @@ Please open an issue first to discuss scope before starting.
 Use the [bug report template](.github/ISSUE_TEMPLATE/bug_report.md). Include your OS, architecture, and the output of:
 
 ```bash
-talk --no-progress "test" 2>&1
+speak --no-progress "test" 2>&1
 ```
 
 ## Pull request guidelines
